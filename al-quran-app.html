@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Quran Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lato:wght@300;400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Al-Quran App Logo">
+                <h2>Al-Quran</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="quran"><i class="fas fa-book-quran"></i> Quran</li>
+                <li data-page="learn"><i class="fas fa-graduation-cap"></i> Learn</li>
+                <li data-page="bookmarks"><i class="fas fa-bookmark"></i> Bookmarks</li>
+                <li data-page="settings"><i class="fas fa-gear"></i> Settings</li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <span class="toggle-switch">
+                    <input type="checkbox" id="night-mode-toggle">
+                    <label for="night-mode-toggle"></label>
+                </span>
+                <i class="fas fa-sun"></i>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header with Search Bar -->
+            <header class="header">
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Search the Quran with AI...">
+                    <button id="search-button">Search</button>
+                </div>
+            </header>
+
+            <!-- Quran Section -->
+            <section id="quran-page" class="page active">
+                <div class="navigation-controls">
+                    <div class="index-buttons">
+                        <button id="surah-index-btn" class="active">Surah Index</button>
+                        <button id="juz-index-btn">Juz Index</button>
+                    </div>
+                    <div class="language-toggle">
+                        <button data-lang="arabic" class="active">Arabic</button>
+                        <button data-lang="english">English</button>
+                        <button data-lang="bangla">Bangla</button>
+                    </div>
+                </div>
+
+                <!-- Surah Index -->
+                <div id="surah-index" class="index-container active">
+                    <div class="surah-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Juz Index -->
+                <div id="juz-index" class="index-container">
+                    <div class="juz-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Quran Content -->
+                <div id="quran-content" class="quran-content">
+                    <div class="surah-header">
+                        <div class="surah-info">
+                            <h2 class="surah-title"></h2>
+                            <p class="surah-subtitle"></p>
+                        </div>
+                        <div class="audio-controls">
+                            <button id="play-surah" class="audio-btn"><i class="fas fa-play"></i> Play Surah</button>
+                            <button id="pause-surah" class="audio-btn"><i class="fas fa-pause"></i> Pause</button>
+                        </div>
+                    </div>
+                    <div class="ayahs-container">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learn Section -->
+            <section id="learn-page" class="page">
+                <h2 class="section-title">Learn Quran</h2>
+                <div class="learning-container">
+                    <div class="learning-nav">
+                        <button data-section="qaidah" class="active">Qaidah</button>
+                        <button data-section="tajweed">Tajweed Rules</button>
+                        <button data-section="practice">Practice</button>
+                    </div>
+                    <div class="learning-content">
+                        <div id="qaidah-section" class="learning-section active">
+                            <h3>Arabic Alphabet (Qaidah)</h3>
+                            <div class="alphabet-container"></div>
+                            <h3>Basic Words</h3>
+                            <div class="basic-words-container"></div>
+                        </div>
+                        <div id="tajweed-section" class="learning-section">
+                            <h3>Tajweed Rules</h3>
+                            <div class="tajweed-rules-container"></div>
+                        </div>
+                        <div id="practice-section" class="learning-section">
+                            <h3>Practice</h3>
+                            <div class="practice-container">
+                                <div class="practice-exercise">
+                                    <div class="exercise-question">
+                                        <p>Identify the following letter:</p>
+                                        <div class="exercise-item"></div>
+                                    </div>
+                                    <div class="exercise-options"></div>
+                                    <div class="exercise-feedback"></div>
+                                    <button class="next-exercise-btn">Next Exercise</button>
+                                </div>
+                                <div class="progress-tracker">
+                                    <h4>Your Progress</h4>
+                                    <div class="progress-bar"><div class="progress"></div></div>
+                                    <p class="progress-stats">0% complete</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bookmarks Section -->
+            <section id="bookmarks-page" class="page">
+                <h2 class="section-title">Bookmarks</h2>
+                <div class="bookmarks-container">
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <p>No bookmarks yet. Add bookmarks while reading the Quran.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-page" class="page">
+                <h2 class="section-title">Settings</h2>
+                <div class="settings-container">
+                    <div class="setting-group">
+                        <h3>Display Options</h3>
+                        <div class="setting-item">
+                            <label for="font-size">Font Size</label>
+                            <input type="range" id="font-size" min="14" max="30" step="2" value="18">
+                            <span class="current-value">18px</span>
+                        </div>
+                        <div class="setting-item">
+                            <label for="arabic-font">Arabic Font</label>
+                            <select id="arabic-font">
+                                <option value="Amiri">Amiri</option>
+                                <option value="Scheherazade">Scheherazade</option>
+                                <option value="Noto Naskh Arabic">Noto Naskh Arabic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <h3>Translation</h3>
+                        <div class="setting-item">
+                            <label for="english-translation">English Translation</label>
+                            <select id="english-translation">
+                                <option value="sahih">Sahih International</option>
+                                <option value="yusuf">Yusuf Ali</option>
+                                <option value="pickthall">Pickthall</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="bangla-translation">Bangla Translation</label>
+                            <select id="bangla-translation">
+                                <option value="bengali">Muhiuddin Khan</option>
+                                <option value="bengali-zakaria">Zohurul Hoque</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <h3>Audio</h3>
+                        <div class="setting-item">
+                            <label for="reciter">Reciter</label>
+                            <select id="reciter">
+                                <option value="abdul_basit">Abdul Basit Abdul Samad</option>
+                                <option value="mishary_rashid_alafasy">Mishary Rashid Alafasy</option>
+                                <option value="abu_bakr_ash_shaatree">Abu Bakr al-Shatri</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="auto-play">Auto-play Next Ayah</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="auto-play">
+                                <label for="auto-play"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <h3>Data Management</h3>
+                        <div class="setting-item">
+                            <button id="clear-bookmarks" class="danger-btn">Clear All Bookmarks</button>
+                        </div>
+                        <div class="setting-item">
+                            <button id="clear-cache" class="danger-btn">Clear Cache</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Results -->
+            <section id="search-results-page" class="page">
+                <h2 class="section-title">Search Results</h2>
+                <div class="search-results-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Audio Player (Hidden) -->
+    <audio id="audio-player"></audio>
+
+    <!-- JavaScript Files -->
+    <script src="js/app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/quran.js"></script>
+    <script src="js/learn.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
